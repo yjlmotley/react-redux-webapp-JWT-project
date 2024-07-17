@@ -7,8 +7,11 @@ import {
 } from "react-router-dom";
 import { Layout } from "./pages/Layout";
 import { Home } from "./pages/Home";
+// import { Private } from "./pages/Private";
 import { Single } from "./pages/Single";
 import { Demo } from "./pages/Demo";
+import SignUp from "./pages/SignUp";
+import LogIn from "./pages/LogIn";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -25,6 +28,10 @@ export const router = createBrowserRouter(
         <Route path= "/" element={<Home />} />
         <Route path="/single/:theId" element={ <Single />} />  {/* Dynamic route for single items */}
         <Route path="/demo" element={<Demo />} />
+        {/* <Route path="/private" element={<Private />} /> */}
+        
+        <Route path="/sign_up" element={<SignUp />} /> 
+        <Route path="/log_in" element={<LogIn />} />
       </Route>
     )
 );

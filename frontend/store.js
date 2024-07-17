@@ -1,5 +1,7 @@
 export const initialStore=()=>{
   return{
+    user: null,
+    token: null,
     message: null,
     todos: [
       {
@@ -16,17 +18,55 @@ export const initialStore=()=>{
   }
 }
 
+
+// export default function storeReducer(store, action = {}) {
+//   switch(action.type){
+//     case 'update_token':
+//       const { token } = action;
+//       return {
+//         ...store,
+//         token
+//       }
+//     case 'update_user':
+//       const { user } = action;
+//       return {
+//         ...store,
+//         user
+//       }
+//     case 'add_task':
+
+//       const { id,  color } = action.payload
+
+//       return {
+//         ...store,
+//         todos: store.todos.map((todo) => (todo.id === id ? { ...todo, background: color } : todo))
+//       };
+//     default:
+//       throw Error('Unknown action.');
+//   }    
+// }
+
 export default function storeReducer(store, action = {}) {
-  switch(action.type){
+  switch(action.type) {
+    case 'update_token':
+      const { token } = action.payload;
+      return {
+        ...store,
+        token
+      };
+    case 'update_user':
+      const { user } = action.payload;
+      return {
+        ...store,
+        user
+      };
     case 'add_task':
-
-      const { id,  color } = action.payload
-
+      const { id, color } = action.payload;
       return {
         ...store,
         todos: store.todos.map((todo) => (todo.id === id ? { ...todo, background: color } : todo))
       };
     default:
-      throw Error('Unknown action.');
-  }    
+      throw new Error('Unknown action.');
+  }
 }

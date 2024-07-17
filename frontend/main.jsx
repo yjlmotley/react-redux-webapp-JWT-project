@@ -6,7 +6,7 @@ import { router } from "./routes";  // Import the router configuration
 import { StoreProvider } from './hooks/useGlobalReducer';  // Import the StoreProvider for global state management
 
 const Main = () => {
-    return (
+    return ( 
         <React.StrictMode>  
             {/* Provide global state to all components */}
             <StoreProvider> 

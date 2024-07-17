@@ -1,0 +1,19 @@
+.navbarContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-buttons {
+    display: flex;
+}
+.nav-buttons > * {
+    margin-right: 10px;
+}
+
+.loginDiv {
+    display: flex;
+    margin-left: 10px;
+}
+.loginDiv > * {
+    margin-right: 5px;
+}
