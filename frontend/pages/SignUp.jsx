@@ -1,14 +1,14 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useGlobalReducer from "../hooks/useGlobalReducer";
 
 
 const SignUp = () => {
-    const { store, dispatch }  = useGlobalReducer();
+    const { store, dispatch } = useGlobalReducer();
     const navigate = useNavigate();
 
-    const [ email, setEmail ] = useState("");
-    const [ password, setPassword ] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -20,19 +20,10 @@ const SignUp = () => {
                 },
                 body: JSON.stringify({
                     email: email,
-                    password: password
+                    password: password  // Send plain password
                 }),
             });
-            if (!response.ok) {
-                const errorMsg = await response.json();
-                throw new Error(`Failed to sign up: ${errorMsg.msg}`);
-            }
-
-            const data = await response.json();
-            console.log("Sign up successful! You can now log in.");
-            alert("Sign up successful! You can now log in.");
-            navigate('/log_in');
-
+            // Handle response
         } catch (error) {
             console.error("Sign up error:", error.message);
         }

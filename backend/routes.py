@@ -28,68 +28,17 @@ def handleSignUp():
         if user:
             return jsonify({"msg": "User already exists."}), 400
         
-        new_user = User(email=email, password=generate_password_hash(password))
+        # Store the password directly as plain text
+        new_user = User(email=email, password=password)
         db.session.add(new_user)
         db.session.commit()
         
-        return jsonify({"msg": "User created succesffuly."}), 201
+        return jsonify({"msg": "User created successfully."}), 201
     
     except Exception as e:
-        print(f"Exception in handleSignUP(): {str(e)}")
+        print(f"Exception in handleSignUp(): {str(e)}")
         return jsonify({"msg": "Internal Server Error"}), 500
 
-# @api.route("/log_in", methods=["POST"])
-# def login():
-#     body = request.json
-#     user: User | None = User.query.filter_by(
-#         email=body["email"]
-#     ).first()
-    
-#     if not user:
-#         return jsonify(msg="Invalid credentials."), 401
-    
-#     return jsonify(token=create_access_token(user))
-
-
-
-# @api.route("/log_in", methods=["POST"])
-# def login():
-#     try:
-#         body = request.json
-#         email = body.get("email")
-#         password = body.get("password")
-
-#         if not email or not password:
-#             return jsonify(msg="Email and password are required."), 400
-
-#         user = User.query.filter_by(email=email).first()
-
-#         if not user or not user.check_password(password):
-#             return jsonify(msg="Invalid credentials."), 401
-
-#         # Assuming User model has a method to generate tokens
-#         access_token = create_access_token(identity=user.id)
-
-#         return jsonify(token=access_token)
-
-#     except Exception as e:
-#         # Log the exception for debugging purposes
-#         print(f"Exception in login(): {str(e)}")
-#         return jsonify(msg="Internal Server Error"), 500
-
-
-# @api.route('/log_in', methods=['POST'])
-# def handleLogIn():
-
-#     email = request.json.get('email')
-#     password = request.json.get('password')
-#     user = User.query.filter_by(email = email).first()
-#     if user is None or not check_password_hash(user.password, password):
-#         return jsonify({"msg": "Invalid username or password"}), 401
-#     # creating token
-#     expiration = datetime.timedelta(days = 3)
-#     access_token = create_access_token(identity = user.id, expires_delta = expiration)
-#     return jsonify({"token": access_token}), 200
 
 @api.route('/log_in', methods=['POST'])
 def handleLogIn():
@@ -102,7 +51,7 @@ def handleLogIn():
 
         user = User.query.filter_by(email=email).first()
 
-        if user is None or not user.check_password(password):
+        if user is None or user.password != password:
             return jsonify({"msg": "Invalid email or password"}), 401
 
         # Creating access token with expiration time of 3 days
@@ -112,11 +61,14 @@ def handleLogIn():
         return jsonify({"token": access_token}), 200
 
     except Exception as e:
-        # Log the exception for debugging purposes
         print(f"Exception in handleLogIn(): {str(e)}")
         return jsonify({"msg": "Internal Server Error"}), 500
 
-
+@api.route('/authenticate_user', methods=['POST'])
+@jwt_required()
+def authenticate():
+    return jsonify(msg = "authenticated valid user")
+    
 
 @api.route("/photos", methods=["POST"])
 @jwt_required()

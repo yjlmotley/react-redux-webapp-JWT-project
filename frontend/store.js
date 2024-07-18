@@ -66,6 +66,8 @@ export default function storeReducer(store, action = {}) {
         ...store,
         todos: store.todos.map((todo) => (todo.id === id ? { ...todo, background: color } : todo))
       };
+    // case 'authenticate_user':
+    //   const { token } = action.payload;
     default:
       throw new Error('Unknown action.');
   }
