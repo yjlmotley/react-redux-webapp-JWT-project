@@ -1,2 +1,6 @@
 INSTALLS:
     pipenv install flask-jwt-extended
+
+
+
+This JWT repo is different than the other one where this one uses React Redux and the other just uses flux
