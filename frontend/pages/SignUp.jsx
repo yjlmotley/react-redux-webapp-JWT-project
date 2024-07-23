@@ -23,7 +23,10 @@ const SignUp = () => {
                     password: password  // Send plain password
                 }),
             });
-            // Handle response
+            const data = await response.json();
+            console.log(data.msg);
+            alert(data.msg);
+            navigate("/log_in");
         } catch (error) {
             console.error("Sign up error:", error.message);
         }

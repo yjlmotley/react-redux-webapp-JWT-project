@@ -59,6 +59,7 @@ def handleLogIn():
         access_token = create_access_token(identity=user.id, expires_delta=expiration)
 
         return jsonify({"token": access_token}), 200
+        return jsonify({"msg": "User created successfully."}), 201
 
     except Exception as e:
         print(f"Exception in handleLogIn(): {str(e)}")

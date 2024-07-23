@@ -32,6 +32,7 @@ export const router = createBrowserRouter(
         
         <Route path="/sign_up" element={<SignUp />} /> 
         <Route path="/log_in" element={<LogIn />} />
+        <Route path ="*" element={<h1>Not found!</h1>} />
       </Route>
     )
 );

@@ -21,11 +21,19 @@ const LogIn = () => {
             body: JSON.stringify({ email, password }),  // Send plain password
         });
         let response = await resp.json();
-        let token = response.token;
-        localStorage.setItem("token", token);
-        navigate("/private");
+
+        if (resp.ok) {
+            let token = response.token;
+            localStorage.setItem("token", token);
+            console.log("Login successful! Token has been set.");
+            navigate("/private");    
+        } else {
+            console.error("Login error:", response.msg);
+            alert("Login failed. Please check your email and password and try again.");
+        }
     } catch (error) {
         console.error('Login error:', error.message);
+        alert("An unexpected error occurred. Please try again.");
     }
 };
 

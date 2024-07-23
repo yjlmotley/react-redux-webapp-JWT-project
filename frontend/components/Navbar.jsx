@@ -4,10 +4,17 @@ export const Navbar = () => {
 	const navigate = useNavigate();
 
 	const handleLogout = () => {
-		sessionStorage.removeItem('token');
-		console.log('Token removed from sessionStorage');
-		alert('Log out successful');
-		navigate('/');
+		const token = localStorage.getItem('token');
+
+		if (token) {
+			localStorage.removeItem('token');
+			console.log('Token removed from localStorage');
+			alert('Log out successful');
+			navigate('/');
+		} else {
+			alert('You must first be logged in');
+		}
+		
 	}
 
 	return (
