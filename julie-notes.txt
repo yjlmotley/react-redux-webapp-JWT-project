@@ -1,0 +1,8 @@
+last checked for no bugs: 8.8.24g
+
+
+INSTALLS:
+    pipenv install flask-jwt-extended
+    
+    `pipenv run start`
+    `npm run start`

@@ -1,2 +1,0 @@
-INSTALLS:
-    pipenv install flask-jwt-extended
